@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo java -jar /opt/stegsolve/stegsolve.jar

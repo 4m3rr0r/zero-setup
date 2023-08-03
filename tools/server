@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# name   : server
+# url    : http://github.com/5h31kh
+# author : 5h31kh
+
+
+# Function to check if Python is installed
+function check_python() {
+    if command -v python &>/dev/null; then
+    echo ""
+    else
+        echo "Python is not installed. Please install Python to run the server."
+        exit 1
+    fi
+}
+
+# Function to start the Python HTTP server
+function start_server() {
+    local port="$1"
+    echo "Starting Python HTTP server on port $port..."
+    python -m http.server "$port"
+}
+
+# Check if Python is installed
+check_python
+
+# Get the port number as input
+read -p "Enter the port number to start the server (default: 80): " port
+
+# Set default port if no input provided
+if [[ -z "$port" ]]; then
+    port=80
+fi
+
+# Start the Python HTTP server
+start_server "$port"
