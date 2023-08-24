@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# Script Information
+# Name   : VPN Connection Manager
+# URL    : http://github.com/4m3rr0r/vpn-manager
+# Author : 4m3rr0r
+
+# Note:
+# Make sure to customize the configuration file paths for each platform within
+# the script before using it.
+
+# Check if the script is executed as root
+if [[ $EUID -ne 0 ]]; then
+    echo "Please run as root"
+    exit 1
+fi
+
+# Function to connect to VPN
+connect_vpn() {
+    local config_path=""
+
+    case $1 in
+        -t | tryhackme)
+            config_path="/home/username/openvpn/tryhackme.ovpn" # CHANGE THIS
+            ;;
+        -ht | hackthebox)
+            config_path="/home/username/openvpn/hackthebox.ovpn" # CHANGE THIS
+            ;;
+        -p | provinggrounds)
+            config_path="/home/username/openvpn/provinggrounds.ovpn" # CHANGE THIS
+            ;;
+        *)
+            echo "Invalid option: $1"
+            display_usage
+            ;;
+    esac
+
+    if [[ -f $config_path ]]; then
+        sudo openvpn "$config_path"
+    else
+        echo "VPN configuration file not found"
+        exit 1
+    fi
+}
+
+# Display usage instructions
+display_usage() {
+    echo ""
+    echo "Usage: $0 -h "
+    echo ""
+    echo "Options:"
+    echo "  -h,  --help         Display this help and exit"
+    echo "  -ht, hackthebox     Connect to HackTheBox network"
+    echo "  -p,  provinggrounds Connect to Proving Grounds network"
+    echo "  -t,  tryhackme      Connect to TryHackMe network"
+    echo ""
+    exit 1
+}
+
+# Main script logic
+if [[ $# -eq 0 ]]; then
+    display_usage
+fi
+
+case $1 in
+    -t | tryhackme)
+        echo "Connecting to TryHackMe network"
+        connect_vpn "$1"
+        ;;
+    -ht | hackthebox)
+        echo "Connecting to HackTheBox network"
+        connect_vpn "$1"
+        ;;
+    -p | provinggrounds)
+        echo "Connecting to Proving Grounds network"
+        connect_vpn "$1"
+        ;;
+    -h | --help)
+        display_usage
+        ;;
+    *)
+        echo "Invalid option: $1"
+        display_usage
+        ;;
+esac
