@@ -54,7 +54,7 @@ Zero Setup organizes the tools and software into categories to provide a well-st
 1. Clone this repository to your local machine.
 
 ```bash
-$ git clone https://github.com/5h31kh/zero-setup
+$ git clone https://github.com/4m3rr0r/zero-setup
 ```
 2. Change into the "zero-setup" directory.
 
