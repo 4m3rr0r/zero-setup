@@ -5,18 +5,14 @@
 # author : 4m3rr0r
 
 
-# Define colors using ANSI escape codes
+# Define colors
     
     RED='\033[1;31m'
     RED1='\033[5;31m'
     green='\033[1;32m'
     GREEN='\033[0;32m'
-    yellow='\033[1;33m'
-    YELLOW='\033[0;33m'
-    YELLOW1='\033[0;33m'
     blue='\033[1;34m'
     BULE='\033[0;34m'
-    magenta='\033[1;35m'
     cyan='\033[1;36m'
     reset='\033[0m' # Reset color to default
     RESET='\033[0m'
@@ -34,41 +30,77 @@ echo -e         " ▀▀▀ ▀▀▀ ▀ ▀ ▀▀▀     ▀▀▀ ▀▀▀ 
 }
 
 
+function osint(){
 
-# Function to Install Cryptography Tools
+# List of tools to install
+tools=("theharvester" "maltego")
 
-function Cryptography() {
-
-#hashid
-if ! which hashid > /dev/null;
-then 
-    echo -e ${RED} " [+]Installing hashid " ${RED1} "please wait" ${RESET}
-    sudo apt install hashid -y > /dev/null;
-    echo -e ${GREEN} "[-]hashid Install complete" ${RESET}
-else
-    echo -e ${GREEN} "[-]hashid is already install on your system"  ${RESET}      
-fi
+# Function to check if a tool is installed
+check_tool() {
+    if which "$1" &> /dev/null
+    then
+        return 0
+    else
+        return 1
+    fi
+}
 
 
-#haiti
-if ! which haiti > /dev/null;
-then 
-    echo -e ${RED} "[+]Installing haiti" ${RED1} "please wait" ${RESET}  
-    sudo gem install haiti-hash > /dev/null;
-    echo -e ${GREEN} "[-]haiti Install complete" ${RESET}  
-else
-    echo -e ${GREEN} "[-]haiti is already install on your system"  ${RESET}      
-fi
+# Loop through each tool
 
-#hashcat
-if ! which hashcat > /dev/null;
-then 
-    echo -e ${RED} "[+]Installing hashcat " ${RED1} "please wait" ${RESET}
-    sudo  apt-get install hashcat -y > /dev/null;
-    echo -e ${GREEN} "[-]hashcat Install complete" ${RESET}
-else
-    echo -e ${GREEN} "[-]hashcat is already install on your system"  ${RESET}      
-fi
+for tool in "${tools[@]}"
+do
+    # Check if the tool is already installed
+    if command -v "$tool" &> /dev/null
+    then
+        # echo "$tool is already installed."
+        echo -e ${GREEN} "[-]" $tool "is already install on your system"  ${RESET}   
+    else
+            # Install the tool using apt
+            echo -e ${RED} "[+] Installing" $tool ${RED1} "please wait" ${RESET}
+            sudo apt install -y "$tool" &> /dev/null
+            echo -e ${GREEN} "[-]" $tool "Install complete" ${RESET}
+
+    fi
+done
+
+}
+
+
+
+function Cryptography(){
+
+# List of tools to install
+tools=("hashid" "hashcat")
+
+# Function to check if a tool is installed
+check_tool() {
+    if which "$1" &> /dev/null
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+
+# Loop through each tool
+
+for tool in "${tools[@]}"
+do
+    # Check if the tool is already installed
+    if command -v "$tool" &> /dev/null
+    then
+        # echo "$tool is already installed."
+        echo -e ${GREEN} "[-]" $tool "is already install on your system"  ${RESET}   
+    else
+            # Install the tool using apt
+            echo -e ${RED} "[+] Installing" $tool ${RED1} "please wait" ${RESET}
+            sudo apt install -y "$tool" &> /dev/null
+            echo -e ${GREEN} "[-]" $tool "Install complete" ${RESET}
+
+    fi
+done
 
 #john
 if ! which john > /dev/null;
@@ -80,105 +112,51 @@ else
     echo -e ${GREEN} "[-]john is already install on your system"  ${RESET}      
 fi
 
-
-
-}
-
-
-# Function to Install OSINT Tools
-
-function osint(){
-
-#theharvester
-if ! which theharvester > /dev/null;
+#haiti
+if ! which haiti > /dev/null;
 then 
-    echo -e ${RED} "[+]Installing theharvester " ${RED1} "please wait" ${RESET}
-    sudo  apt-get install theharvester -y > /dev/null;
-    echo -e ${GREEN} "[-]theharvester Install complete" ${RESET}
+    echo -e ${RED} "[+]Installing haiti" ${RED1} "please wait" ${RESET}  
+    sudo gem install haiti-hash > /dev/null;
+    echo -e ${GREEN} "[-]haiti Install complete" ${RESET}  
 else
-    echo -e ${GREEN} "[-]theharvester is already install on your system"  ${RESET}      
-fi
-
-
-#Maltego
-if ! which maltego > /dev/null;
-then 
-    echo -e ${RED} "[+]Installing maltego " ${RED1} "please wait" ${RESET}
-    sudo  apt-get install maltego -y > /dev/null;
-    echo -e ${GREEN} "[-]maltego Install complete" ${RESET}
-else
-    echo -e ${GREEN} "[-]maltego is already install on your system"  ${RESET}      
+    echo -e ${GREEN} "[-]haiti is already install on your system"  ${RESET}      
 fi
 
 }
 
-# Function to Install Steganography Tools
 
-function Steganography() {
+function Steganography(){
 
-#binwalk
-if ! which binwalk > /dev/null;
-then 
-    echo -e ${RED} "[+]Installing binwalk" ${RED1} "please wait" ${RESET}  
-    sudo   apt-get install binwalk -y > /dev/null;
-    echo -e ${GREEN} "[-]binwalk Install complete" ${RESET}  
-else
-    echo -e ${GREEN} "[-]binwalk is already install on your system"  ${RESET}    
-fi
+# List of tools to install
+tools=("binwalk" "zsteg" "steghide" "sonic-visualiser" "fcrackzip" "")
 
-#zsteg
-if ! which zsteg > /dev/null;
-then 
-    echo -e ${RED} "[+]Installing zsteg" ${RED1} "please wait" ${RESET}  
-    sudo gem install zsteg > /dev/null;
-    echo -e ${GREEN} "[-]zsteg Install complete" ${RESET}  
-else
-    echo -e ${GREEN} "[-]zsteg is already install on your system"  ${RESET}      
-fi
+# Function to check if a tool is installed
+check_tool() {
+    if which "$1" &> /dev/null
+    then
+        return 0
+    else
+        return 1
+    fi
+}
 
+# Loop through each tool
 
-#Steghide
-if ! which steghide > /dev/null;
-then 
-    echo -e ${RED} "[+]Installing steghide" ${RED1} "please wait" ${RESET}
-    sudo  apt-get install steghide -y > /dev/null;
-    echo -e ${GREEN} "[-]steghide Install complete" ${RESET}
-else
-    echo -e ${GREEN} "[-]steghide is already install on your system"  ${RESET}      
-fi
+for tool in "${tools[@]}"
+do
+    # Check if the tool is already installed
+    if command -v "$tool" &> /dev/null
+    then
+        # echo "$tool is already installed."
+        echo -e ${GREEN} "[-]" $tool "is already install on your system"  ${RESET}   
+    else
+            # Install the tool using apt
+            echo -e ${RED} "[+] Installing" $tool ${RED1} "please wait" ${RESET}
+            sudo apt install -y "$tool" &> /dev/null
+            echo -e ${GREEN} "[-]" $tool "Install complete" ${RESET}
 
-
-#exiftool
-if ! which exiftool > /dev/null;
-then 
-    echo -e ${RED} "[+]Installing exiftool" ${RED1} "please wait" ${RESET}
-    sudo  apt-get install libimage-exiftool-perl -y > /dev/null;
-    echo -e ${GREEN} "[-]exiftool Install complete" ${RESET}
-else
-    echo -e ${GREEN} "[-]exiftool is already install on your system"  ${RESET}      
-fi
-
-
-#sonic-visualiser
-if ! which sonic-visualiser > /dev/null;
-then 
-    echo -e ${RED} "[+]Installing sonic-visualiser " ${RED1} "please wait" ${RESET}
-    sudo  apt-get install sonic-visualiser -y > /dev/null;
-    echo -e ${GREEN} "[-]sonic-visualiser Install complete" ${RESET}
-else
-    echo -e ${GREEN} "[-]sonic-visualiser is already install on your system"  ${RESET}      
-fi
-
-
-#fcrackzip
-if ! which fcrackzip > /dev/null;
-then 
-    echo -e ${RED} "[+]Installing fcrackzip " ${RED1} "please wait" ${RESET}
-    sudo  apt-get install fcrackzip -y > /dev/null
-    echo -e ${GREEN} "[-]fcrackzip Install complete" ${RESET}
-else
-    echo -e ${GREEN} "[-]fcrackzip is already install on your system"  ${RESET}      
-fi
+    fi
+done
 
 #stegsolve
 if ! which stegsolve > /dev/null;
@@ -197,6 +175,17 @@ else
     echo -e ${GREEN} "[-]stegsolve is already install on your system"  ${RESET}      
 fi
 
+
+#exiftool
+if ! which exiftool > /dev/null;
+then 
+    echo -e ${RED} "[+]Installing exiftool" ${RED1} "please wait" ${RESET}
+    sudo  apt-get install libimage-exiftool-perl -y > /dev/null;
+    echo -e ${GREEN} "[-]exiftool Install complete" ${RESET}
+else
+    echo -e ${GREEN} "[-]exiftool is already install on your system"  ${RESET}      
+fi
+
 #stegoveritas
 if ! which stegoveritas > /dev/null;
 then 
@@ -211,7 +200,9 @@ fi
 
 }
 
-# Function to Install Forensics Tools
+
+
+
 
 
 function forensics(){
@@ -228,78 +219,111 @@ then
     rm -rvf volatility_2.6_lin64_standalone > /dev/null;
     git clone https://github.com/5h31kh/volatility-plugins.git > /dev/null;
     mv  volatility-plugins /opt
-    echo -e ${GREEN} "[-]volatility Install complete" ${RESET}
+    echo -e ${GREEN} "[-] volatility Install complete" ${RESET}
 else
-    echo -e ${GREEN} "[-]volatility is already install on your system"  ${RESET}      
+    echo -e ${GREEN} "[-] volatility is already install on your system"  ${RESET}      
 fi
-
-
-
-
 
 }
 
-
-
-# Function to Install other Tools
-
-
 function other() {
+
+# List of tools to install
+tools=("curl" "git" "wget" "git" "python2" "python3" "python3-pip" "gcc" "jq" "host" "dig" "make"
+"gnome-disk-utility" "seclists")
+
+# Function to check if a tool is installed
+check_tool() {
+    if which "$1" &> /dev/null
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+
+# Loop through each tool
+
+for tool in "${tools[@]}"
+do
+    # Check if the tool is already installed
+    if command -v "$tool" &> /dev/null
+    then
+        # echo "$tool is already installed."
+        echo -e ${GREEN} "[-]" $tool "is already install on your system"  ${RESET}   
+    else
+            # Install the tool using apt
+            echo -e ${RED} "[+] Installing" $tool ${RED1} "please wait" ${RESET}
+            sudo apt install -y "$tool" &> /dev/null
+            echo -e ${GREEN} "[-]" $tool "Install complete" ${RESET}
+
+    fi
+done
 
 
 #server
 if ! which server > /dev/null;
 then 
-    echo -e ${RED} "[+]Installing server " ${RED1} "please wait" ${RESET}
+    echo -e ${RED} "[+] Installing server " ${RED1} "please wait" ${RESET}
         sudo mv tools/server /usr/local/bin > /dev/null;
+        sudo chmod +x /usr/local/bin/server
     echo -e ${GREEN} "[-]server Install complete" ${RESET}
 else
-    echo -e ${GREEN} "[-]server is already install on your system"  ${RESET}      
+    echo -e ${GREEN} "[-] server is already install on your system"  ${RESET}      
 fi
 
 #winpslist
 if ! which winpslist > /dev/null;
 then 
-    echo -e ${RED} "[+]Installing winpslist " ${RED1} "please wait" ${RESET}
+    echo -e ${RED} "[+] Installing winpslist " ${RED1} "please wait" ${RESET}
     sudo mv tools/winpslist /usr/local/bin 
+    sudo chmod +x /usr/local/bin/winpslist
     echo -e ${GREEN} "[-]dewinpslisto Install complete" ${RESET}
 else
-    echo -e ${GREEN} "[-]winpslist is already install on your system"  ${RESET}      
+    echo -e ${GREEN} "[-] winpslist is already install on your system"  ${RESET}      
 fi
 
 #mac-changerPro
 if ! which mac-changerPro > /dev/null;
 then 
-    echo -e ${RED} "[+]Installing mac-changerPro " ${RED1} "please wait" ${RESET}
-    git clone https://github.com/5h31kh/mac-changerPro.git  > /dev/null;
+    echo -e ${RED} "[+] Installing mac-changerPro " ${RED1} "please wait" ${RESET}
+    git clone https://github.com/4m3rr0r/mac-changerPro.git  > /dev/null;
     sudo mv mac-changerPro/mac-changerPro /usr/local/bin 
+    sudo chmod +x /usr/local/bin/mac-changerPro
     sudo rm -rvf mac-changerPro  > /dev/null;
     echo -e ${GREEN} "[-]mac-changerPro Install complete" ${RESET}
 else
-    echo -e ${GREEN} "[-]mac-changerPro is already install on your system"  ${RESET}      
+    echo -e ${GREEN} "[-] mac-changerPro is already install on your system"  ${RESET}      
 fi
 
 #debInjector
 if ! which debInjector > /dev/null;
 then 
-    echo -e ${RED} "[+]Installing debInjector " ${RED1} "please wait" ${RESET}
-    git clone https://github.com/5h31kh/debInjector.git  > /dev/null;
+    echo -e ${RED} "[+] Installing debInjector " ${RED1} "please wait" ${RESET}
+    git clone https://github.com/4m3rr0r/debInjector.git  > /dev/null;
     sudo mv debInjector/debInjector /usr/local/bin 
+    sudo chmod +x /usr/local/bin/debInjector
     sudo rm -rvf debInjector  > /dev/null;
     echo -e ${GREEN} "[-]debInjector Install complete" ${RESET}
 else
-    echo -e ${GREEN} "[-]debInjector is already install on your system"  ${RESET}      
+    echo -e ${GREEN} "[-] debInjector is already install on your system"  ${RESET}      
 fi
 
-#seclists
-if ! which seclists > /dev/null;
+
+
+#vpn
+if ! which debInjector > /dev/null;
 then 
-    echo -e ${RED} "[+]Installing seclists " ${RED1} "please wait" ${RESET}
-    sudo  apt-get install seclists -y > /dev/null;
-    echo -e ${GREEN} "[-]seclists Install complete" ${RESET}
+    echo -e ${RED} "[+] Installing debInjector " ${RED1} "please wait" ${RESET}
+    sudo mv /tools/vpn /usr/local/bin
+    sudo chmod +x /usr/local/bin/vpn
+    sudo rm -rvf debInjector  > /dev/null;
+    echo -e ${GREEN} "[-]debInjector Install complete" ${RESET}
 else
-    echo -e ${GREEN} "[-]seclists is already install on your system"  ${RESET}      
+    echo -e ${GREEN} "[-] debInjector is already install on your system"  ${RESET}      
 fi
+
 
 }
 
@@ -319,8 +343,6 @@ function list() {
         echo -e "${categories[$category]}" | awk -v cat="$category" '{print "\033[1m----" cat "----\033[0m\n"; print $0 "\n"}'
     done
 }
-
-
 
 
 

@@ -40,6 +40,11 @@ Zero Setup organizes the tools and software into categories to provide a well-st
 - Volatility Plugins
 - Volatility 3
 
+## Bug Hunting
+
+coming soon
+
+
 ### Other tools
 
 - server
@@ -47,6 +52,7 @@ Zero Setup organizes the tools and software into categories to provide a well-st
 - mac-changerPro
 - debInjector
 - seclists
+- gnome-disk-utility
 
 
 ## Installation
