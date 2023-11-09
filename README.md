@@ -67,7 +67,13 @@ $ git clone https://github.com/4m3rr0r/zero-setup
 ```bash
 $ cd zero-setup
 ```
-3. Run the script with the following command to start the installation process:
+3. giving execute permission
+
+```bash
+$ sudo chmod +x setup.sh
+```
+
+4. Run the script with the following command to start the installation process:
 
 ```bash
 $ ./setup.sh
