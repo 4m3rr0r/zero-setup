@@ -70,5 +70,5 @@ $ cd zero-setup
 3. Run the script with the following command to start the installation process:
 
 ```bash
-$ ./setup
+$ ./setup.sh
 ```
