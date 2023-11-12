@@ -376,7 +376,7 @@ then
     exit 1
 elif [[ ${1} == "-v" ]] || [[ ${1} == "--version" ]]
 then
-    echo -e "${YELLOW} program version 1.0.0 ${RESET} "
+    echo -e "${YELLOW} program version 1.1.0 ${RESET} "
 elif [[ ${1} == "-a" ]] || [[ ${1} == "--all" ]] || [[ ${1} == "all" ]]
 then
     
