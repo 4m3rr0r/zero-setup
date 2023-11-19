@@ -1,6 +1,6 @@
 # Zero-Setup
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-GNU-GENERAL.svg)](LICENSE)
 
 ## Description
 
@@ -16,11 +16,12 @@ Zero Setup organizes the tools and software into categories to provide a well-st
 - haiti
 - Hashcat
 - John the Ripper
+- CyberChef
 
 ### OSINT (Open-source intelligence)
 
-- TheHarvester: Email, subdomain, and people names harvester.
-- Maltego: Interactive data mining tool.
+- TheHarvester
+- Maltego
 
 ### Steganography
 
@@ -39,17 +40,46 @@ Zero Setup organizes the tools and software into categories to provide a well-st
 - Volatility 2
 - Volatility Plugins
 - Volatility 3
+- comming soon
+
 
 ## Bug Hunting
-
-coming soon
-
+ - fuzz
+ - gobuster
+ - nikto
+ - arjun
+ - gospider
+ - dirsearch
+ - nmap
+ - dnsx
+ - wapiti
+ - assetfinder
+ - subfinder
+ - massdns
+ - sublist3r
+ - httprobe
+ - ffuf
+ - wfuzz
+ - nuclei
+ - gron
+ - hakrawler
+ - subjack
+ - amass
+ - subfinder
+ - knockpy
+ - masscan
+ - whatweb
+ - crlf
+ - sqlmap
+ - s3scanner
+ - httpx
 
 ### Other tools
 
 - server
 - winpslist
 - mac-changerPro
+- vpn
 - debInjector
 - seclists
 - gnome-disk-utility
